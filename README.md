@@ -32,7 +32,11 @@ Bu proje, Spring Framework'ün temel kavramlarını uygulamalı örneklerle öğ
     │                   ├── loose/
     │                   │   └── coupling/
     │                   │       ├── LooseCouplingExample.java
-    │                   │       └── ... 
+    │                   │       ├── NewDatabaseProvider.java
+    │                   │       ├── UserDatabaseProvider.java
+    │                   │       ├── UserDataProvider.java
+    │                   │       ├── UserManager.java
+    │                   │       └── WebServiceDataProvider.java
     │                   └── tight/
     │                       └── couple/
     │                           ├── TightCouplingExample.java
