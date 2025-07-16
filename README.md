@@ -2,52 +2,6 @@
 Bu proje, Spring Framework'ün temel kavramlarını uygulamalı örneklerle öğretmek için hazırlanmıştır.
 İçerikte IoC (Inversion of Control), Dependency Injection, Loose/Tight Coupling ve farklı injection yöntemleri detaylıca ele alınmıştır.
 
-⚙️ Proje Yapısısrc/
-└── main/
-    ├── java/
-    │   └── car/
-    │       └── example/
-    │           ├── bean/
-    │           │   ├── App.java
-    │           │   └── MyBean.java
-    │           ├── constructor/
-    │           │   └── injection/
-    │           │       ├── App.java
-    │           │       ├── Car.java
-    │           │       └── Specification.java
-    │           ├── setter/
-    │           │   └── injection/
-    │           │       ├── App.java
-    │           │       ├── Car.java
-    │           │       └── Specification.java
-    │           └── com/
-    │               └── ioc/
-    │                   ├── coupling/
-    │                   │   ├── IoCExample.java
-    │                   │   ├── NewDatabaseProvider.java
-    │                   │   ├── UserDatabaseProvider.java
-    │                   │   ├── UserDataProvider.java
-    │                   │   ├── UserManager.java
-    │                   │   └── WebServiceDataProvider.java
-    │                   ├── loose/
-    │                   │   └── coupling/
-    │                   │       ├── LooseCouplingExample.java
-    │                   │       ├── NewDatabaseProvider.java
-    │                   │       ├── UserDatabaseProvider.java
-    │                   │       ├── UserDataProvider.java
-    │                   │       ├── UserManager.java
-    │                   │       └── WebServiceDataProvider.java
-    │                   └── tight/
-    │                       └── couple/
-    │                           ├── TightCouplingExample.java
-    │                           ├── UserDatabase.java
-    │                           └── UserManager.java
-    └── resources/
-        ├── application.properties
-        ├── applicationBeanContext.xml
-        ├── applicationConstructorInjection.xml
-        ├── applicationIoCouplingExample.xml
-        └── applicationSetterInjection.xml
 🔑 1. IoC (Inversion of Control) Nedir?
 Geleneksel Yaklaşım: Sınıflar kendi bağımlılıklarını kendi oluşturur.
 
