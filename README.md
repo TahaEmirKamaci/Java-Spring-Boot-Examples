@@ -1,136 +1,315 @@
-📌 Java Spring Boot IoC & Dependency Injection Örnekleri
-Bu proje, Spring Framework'ün temel kavramlarını uygulamalı örneklerle öğretmek için hazırlanmıştır.
-İçerikte IoC (Inversion of Control), Dependency Injection, Loose/Tight Coupling ve farklı injection yöntemleri detaylıca ele alınmıştır.
+# 📌 Java Spring Boot IoC & Dependency Injection Examples
 
-⚙️ Proje Yapısı
+This project provides comprehensive examples of Spring Framework's core concepts including IoC (Inversion of Control), Dependency Injection, Loose/Tight Coupling, and various injection methods with detailed practical implementations.
+
+## ⚙️ Project Structure
+
 ```
 src/
 ├── main/
 │   ├── java/
-│   │   └── car/example/
-│   │       ├── bean/
-│   │       │   ├── App.java
-│   │       │   └── MyBean.java
-│   │       ├── constructor/injection/
-│   │       │   ├── App.java
-│   │       │   ├── Car.java
-│   │       │   └── Specification.java
-│   │       ├── setter/injection/
-│   │       │   ├── App.java
-│   │       │   ├── Car.java
-│   │       │   └── Specification.java
-│   │       └── com/ioc/
-│   │           ├── coupling/
-│   │           │   ├── IoCExample.java
-│   │           │   ├── NewDatabaseProvider.java
-│   │           │   ├── UserDatabaseProvider.java
-│   │           │   ├── UserDataProvider.java
-│   │           │   ├── UserManager.java
-│   │           │   └── WebServiceDataProvider.java
-│   │           ├── loose/coupling/
-│   │           │   ├── LooseCouplingExample.java
-│   │           │   ├── NewDatabaseProvider.java
-│   │           │   ├── UserDatabaseProvider.java
-│   │           │   ├── UserDataProvider.java
-│   │           │   ├── UserManager.java
-│   │           │   └── WebServiceDataProvider.java
-│   │           └── tight/couple/
-│   │               ├── TightCouplingExample.java
-│   │               ├── UserDatabase.java
-│   │               └── UserManager.java
-│   └── resources/
-│       ├── application.properties
-│       ├── applicationBeanContext.xml
-│       ├── applicationConstructorInjection.xml
-│       ├── applicationIoCouplingExample.xml
-│       └── applicationSetterInjection.xml
+│   │   ├── car/
+│   │   │   └── example/
+│   │   │       ├── bean/
+│   │   │       │   ├── App.java
+│   │   │       │   └── MyBean.java
+│   │   │       ├── constructor/
+│   │   │       │   └── injection/
+│   │   │       │       ├── App.java
+│   │   │       │       ├── Car.java
+│   │   │       │       └── Specification.java
+│   │   │       └── setter/
+│   │   │           └── injection/
+│   │   │               ├── App.java
+│   │   │               ├── Car.java
+│   │   │               └── Specification.java
+│   │   └── com/
+│   │       └── example/
+│   │           ├── autowire/
+│   │           │   ├── annotation/
+│   │           │   │   ├── App.java
+│   │           │   │   ├── AppConfig.java
+│   │           │   │   ├── Employee.java
+│   │           │   │   └── Manager.java
+│   │           │   ├── constructor/
+│   │           │   │   ├── App.java
+│   │           │   │   ├── Car.java
+│   │           │   │   └── Specification.java
+│   │           │   ├── name/
+│   │           │   │   ├── App.java
+│   │           │   │   ├── Car.java
+│   │           │   │   └── Specification.java
+│   │           │   └── type/
+│   │           │       ├── App.java
+│   │           │       ├── Car.java
+│   │           │       └── Specification.java
+│   │           ├── componentscan/
+│   │           │   └── annotation/
+│   │           │       ├── App.java
+│   │           │       ├── AppConfig.java
+│   │           │       └── Employee.java
+│   │           └── coupling/
+│   │               ├── ioc/
+│   │               │   ├── IoCExample.java
+│   │               │   ├── NewDatabaseProvider.java
+│   │               │   ├── UserDatabaseProvider.java
+│   │               │   ├── UserDataProvider.java
+│   │               │   ├── UserManager.java
+│   │               │   └── WebServiceDataProvider.java
+│   │               ├── loose/
+│   │               │   ├── LooseCouplingExample.java
+│   │               │   ├── NewDatabaseProvider.java
+│   │               │   ├── UserDatabaseProvider.java
+│   │               │   ├── UserDataProvider.java
+│   │               │   ├── UserManager.java
+│   │               │   └── WebServiceDataProvider.java
+│   │               └── tight/
+│   │                   ├── TightCouplingExample.java
+│   │                   ├── UserDatabase.java
+│   │                   └── UserManager.java
+│
+├── resources/
+│   ├── application.properties
+│   ├── applicationBeanContext.xml
+│   ├── applicationConstructorInjection.xml
+│   ├── applicationIoCouplingExample.xml
+│   ├── applicationSetterInjection.xml
+│   ├── autowireByConstructor.xml
+│   ├── autowireByName.xml
+│   ├── autowireByType.xml
+│   └── componentScanDemo.xml
+│
+├── test/
+
 ```
 
+## 🔑 1. IoC (Inversion of Control) Overview
 
-🔑 1. IoC (Inversion of Control) Nedir?
-Geleneksel Yaklaşım: Sınıflar kendi bağımlılıklarını kendi oluşturur.
+**Traditional Approach**: Classes create their own dependencies internally.
 
-IoC Yaklaşımı: Bağımlılıklar dışarıdan (Spring Container) sağlanır.
+**IoC Approach**: Dependencies are provided externally by the Spring Container.
 
-Avantajları:
-✅ Loose Coupling
-✅ Kolay test edilebilirlik
-✅ Kolay bakım
-✅ Esneklik
+### Benefits:
+- ✅ Loose Coupling
+- ✅ Easy testability
+- ✅ Easy maintenance
+- ✅ Flexibility
 
-🧩 2. Bean Tanımları
-Bean: Spring Container tarafından yönetilen nesneler.
+## 🧩 2. Bean Definitions
 
-Scope: Singleton (varsayılan) veya Prototype.
+**Bean**: Objects managed by the Spring Container.
 
-MyBean sınıfı temel bir örnektir. Lifecycle yönetimi Spring’e aittir.
+**Scope**: Singleton (default) or Prototype.
 
-🏗️ 3. Constructor Injection
-Bağımlılıklar constructor üzerinden sağlanır.
+The `MyBean` class serves as a basic example where lifecycle management is handled by Spring.
 
-Immutable nesneler üretmek için idealdir.
+## 🏗️ 3. Constructor Injection
 
-Zorunlu bağımlılıklar compile-time’da kontrol edilir.
+Dependencies are provided through the constructor.
 
-Örnek: Car sınıfı, Specification bağımlılığını constructor ile alır.
+- Ideal for creating immutable objects
+- Mandatory dependencies are checked at compile-time
+- **Example**: The `Car` class receives its `Specification` dependency via constructor
 
-⚙️ 4. Setter Injection
-Bağımlılıklar setter metodları ile sağlanır.
+```java
+public class Car {
+    private final Specification specification;
+    
+    public Car(Specification specification) {
+        this.specification = specification;
+    }
+}
+```
 
-Opsiyonel bağımlılıklar için uygundur.
+## ⚙️ 4. Setter Injection
 
-Runtime’da bağımlılık değiştirilebilir.
+Dependencies are provided through setter methods.
 
-Kullanım Senaryosu: İsteğe bağlı bağımlılıklar, runtime config değişiklikleri.
+- Suitable for optional dependencies
+- Dependencies can be changed at runtime
+- **Use Case**: Optional dependencies, runtime configuration changes
 
-🔒 5. Tight Coupling (Sıkı Bağlantı)
-Sınıflar birbirine sıkıca bağlıdır.
+```java
+public class Car {
+    private Specification specification;
+    
+    public void setSpecification(Specification specification) {
+        this.specification = specification;
+    }
+}
+```
 
-Değişiklik ve test zordur.
+## 🔒 5. Tight Coupling
 
-TightCouplingExample paketinde örneği bulunur.
+Classes are tightly bound to each other.
 
-🔑 6. Loose Coupling (Gevşek Bağlantı)
-Interface kullanımı ile gevşek bağlantı sağlanır.
+- Changes and testing are difficult
+- Example found in `tight.couple` package
 
-Farklı implementasyonlar kolayca entegre edilir.
+```java
+public class UserManager {
+    private UserDatabase userDatabase = new UserDatabase(); // Tight coupling
+}
+```
 
-Test yazımı kolaylaşır.
+## 🔑 6. Loose Coupling
 
-Örnek: UserDataProvider arayüzü ile farklı veri sağlayıcıları (UserDatabaseProvider, WebServiceDataProvider, NewDatabaseProvider) kullanılabilir.
+Loose coupling is achieved through interface usage.
 
-🗂️ 7. IoC Container ile Coupling
-IoCExample paketi Spring Container’ın:
+- Different implementations can be easily integrated
+- Testing becomes easier
+- **Example**: `UserDataProvider` interface allows different data providers (`UserDatabaseProvider`, `WebServiceDataProvider`, `NewDatabaseProvider`)
 
-Bean oluşturma
+```java
+public class UserManager {
+    private UserDataProvider userDataProvider; // Loose coupling via interface
+}
+```
 
-Bağımlılık inject etme
+## 🗂️ 7. IoC Container with Coupling
 
-Lifecycle yönetimi
+The `IoCExample` package demonstrates Spring Container's:
 
-Scope kontrolü
+- Bean creation
+- Dependency injection
+- Lifecycle management
+- Scope control
 
-işlevlerini gösterir.
+## 🧪 8. Autowiring (Automatic Wiring)
 
-⚙️ 8. XML Configuration
-Dosya	İçerik
-applicationBeanContext.xml	Temel bean tanımları, scope, property injection
-applicationConstructorInjection.xml	Constructor injection konfigürasyonu
-applicationSetterInjection.xml	Setter method injection
-applicationIoCouplingExample.xml	IoC coupling örnek konfigürasyonu
+Spring XML configurations allow beans to be automatically wired. There are 3 main approaches:
 
-✅ 9. Öğrenilen Temel Kavramlar
-IoC Container: BeanFactory, ApplicationContext, bean lifecycle
+### 🔹 Autowiring by Name
+Matches by bean ID.
+```xml
+<bean id="specification" class="car.example.Specification"/>
+<bean id="car" class="car.example.Car" autowire="byName"/>
+```
 
-DI Türleri: Constructor Injection, Setter Injection
+### 🔹 Autowiring by Type
+Matches by bean type.
+```xml
+<bean class="car.example.Specification"/>
+<bean class="car.example.Car" autowire="byType"/>
+```
 
-Coupling Türleri: Tight Coupling vs Loose Coupling
+### 🔹 Autowiring by Constructor
+Matches based on constructor parameters.
+```xml
+<bean class="car.example.Specification"/>
+<bean class="car.example.Car" autowire="constructor"/>
+```
 
-🚀 10. Çalıştırma Talimatları
-Maven Bağımlılıkları
-xml
-Copy
-Edit
+## 🏷️ 9. Introduction to Annotations
+
+Spring can be configured using Java annotations instead of XML configuration. The following annotations are frequently used:
+
+### ✅ Understanding Components & ComponentScan
+
+`@Component` registers a class as a bean in the Spring Container.
+
+```java
+@Component
+public class MyBean {}
+```
+
+`@ComponentScan` specifies which packages to scan for beans:
+
+```java
+@Configuration
+@ComponentScan(basePackages = "car.example.annotation")
+public class AppConfig {}
+```
+
+### ✅ Hands on: Component & Component Scan
+
+Practical implementation of component scanning:
+
+```java
+@Component("mySpecialBean")
+public class Specification {
+    // Bean implementation
+}
+
+@Configuration
+@ComponentScan(basePackages = {"car.example.bean", "car.example.constructor"})
+public class AppConfig {
+    // Configuration class
+}
+```
+
+### ✅ @Autowired Annotation
+
+Spring automatically injects the required dependency.
+
+```java
+@Component
+public class Car {
+    @Autowired
+    private Specification specification;
+}
+```
+
+### ✅ @Qualifier Annotation
+
+When multiple beans exist, specifies which one to use.
+
+```java
+@Autowired
+@Qualifier("newDatabaseProvider")
+private UserDataProvider provider;
+```
+
+### ✅ @Value Annotation
+
+Retrieves values from application.properties file.
+
+```java
+@Value("${car.brand}")
+private String brand;
+```
+
+## 🔁 10. Transition from XML to Annotations in Spring
+
+Spring Framework configuration is gradually moving towards annotation-based structures.
+
+| Classic XML | Annotation Equivalent |
+|-------------|----------------------|
+| `<bean>` | `@Component` / `@Service` / `@Repository` |
+| `<context:component-scan>` | `@ComponentScan` |
+| `property name="" ref=""` | `@Autowired` / `@Qualifier` |
+| `value="..."` | `@Value` |
+
+### Advantages:
+- Cleaner and more readable structure
+- IDE support prevents compile-time errors
+- Configuration can be controlled directly in Java
+
+## ⚙️ 11. XML Configuration Files
+
+| File | Content |
+|------|---------|
+| `applicationBeanContext.xml` | Basic bean definitions, scope, property injection |
+| `applicationConstructorInjection.xml` | Constructor injection configuration |
+| `applicationSetterInjection.xml` | Setter method injection |
+| `applicationIoCouplingExample.xml` | IoC coupling example configuration |
+| `autowireByName.xml` | Autowiring by name configuration |
+| `autowireByType.xml` | Autowiring by type configuration |
+| `autowireByConstructor.xml` | Autowiring by constructor configuration |
+| `componentScanDemo.xml` | Component scan demonstration |
+
+## ✅ 12. Core Concepts Learned
+
+- **IoC Container**: BeanFactory, ApplicationContext, bean lifecycle
+- **DI Types**: Constructor Injection, Setter Injection
+- **Coupling Types**: Tight Coupling vs Loose Coupling
+- **Autowiring**: byName, byType, constructor
+- **Annotations**: @Component, @Autowired, @Qualifier, @Value
+
+## 🚀 13. Running Instructions
+
+### Maven Dependencies
+```xml
 <dependencies>
   <dependency>
     <groupId>org.springframework</groupId>
@@ -138,23 +317,60 @@ Edit
     <version>5.3.21</version>
   </dependency>
 </dependencies>
-Çalıştırılabilir Sınıflar
-Senaryo	Sınıf
-Bean örneği	car.example.bean.App
-Constructor Injection	car.example.constructor.injection.App
-Setter Injection	car.example.setter.injection.App
-Tight Coupling	com.ioc.coupling.tight.couple.TightCouplingExample
-Loose Coupling	com.ioc.coupling.loose.coupling.LooseCouplingExample
-IoC Container	com.ioc.coupling.IoCExample
+```
 
-🎯 11. Gerçek Dünya Uygulamaları
-Service Layer Design
+### Executable Classes
 
-Repository Pattern
+| Scenario | Class |
+|----------|-------|
+| Bean example | `car.example.bean.App` |
+| Constructor Injection | `car.example.constructor.injection.App` |
+| Setter Injection | `car.example.setter.injection.App` |
+| Tight Coupling | `car.example.tight.couple.TightCouplingExample` |
+| Loose Coupling | `car.example.loose.coupling.LooseCouplingExample` |
+| Autowiring by Name | `car.example.autowire.byname.App` |
+| Autowiring by Type | `car.example.autowire.bytype.App` |
+| Autowiring by Constructor | `car.example.autowire.constructor.App` |
+| Component Scan Demo | `car.example.annotation.App` |
 
-Strategy Pattern
+## 🎯 14. Real-World Applications
 
-Factory Pattern
+- **Service Layer Design**
+- **Repository Pattern**
+- **Strategy Pattern**
+- **Factory Pattern**
+- **Clean Architecture Principles**
 
-Clean Architecture Principles
+## 🧪 15. Best Practices
 
+1. **Prefer Constructor Injection** for mandatory dependencies
+2. **Use Setter Injection** for optional dependencies
+3. **Implement interfaces** for loose coupling
+4. **Use @Qualifier** when multiple beans of same type exist
+5. **Leverage @Value** for external configuration
+6. **Organize components** with proper package structure
+
+## 📝 16. Common Pitfalls
+
+- **Circular Dependencies**: Avoid circular references between beans
+- **Bean Scope Issues**: Understand singleton vs prototype scopes
+- **Missing @ComponentScan**: Ensure proper package scanning
+- **Ambiguous Bean Resolution**: Use @Qualifier for disambiguation
+
+## 🔧 17. Troubleshooting
+
+- **NoSuchBeanDefinitionException**: Check component scanning or bean definitions
+- **BeanCreationException**: Verify constructor parameters and dependencies
+- **Circular dependency detected**: Restructure dependencies or use @Lazy
+
+## 📚 18. Further Learning
+
+- Spring Boot Auto-Configuration
+- Spring Data JPA
+- Spring Security
+- Spring MVC
+- Microservices with Spring Cloud
+
+---
+
+**Note**: This project serves as a comprehensive learning resource for understanding Spring Framework's dependency injection and IoC concepts through practical examples.
