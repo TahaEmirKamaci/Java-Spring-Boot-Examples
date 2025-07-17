@@ -363,14 +363,6 @@ Spring Framework configuration is gradually moving towards annotation-based stru
 - **BeanCreationException**: Verify constructor parameters and dependencies
 - **Circular dependency detected**: Restructure dependencies or use @Lazy
 
-## 📚 18. Further Learning
-
-- Spring Boot Auto-Configuration
-- Spring Data JPA
-- Spring Security
-- Spring MVC
-- Microservices with Spring Cloud
-
 ---
 
 **Note**: This project serves as a comprehensive learning resource for understanding Spring Framework's dependency injection and IoC concepts through practical examples.
